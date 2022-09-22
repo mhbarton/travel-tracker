@@ -4,11 +4,66 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+  <title>travel-tracker</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <section class="main-view" id="mainView">
+    <section class="upper-container" id="upperContainer">
+      <div class="logo-info-container" id="logoInfoContainer">
+        <img class="worldwide-logo" src="./images/worldwide-logo.png" alt="globe logo">
+        <h1 class="company-name" id="companyName">GlobeTrekker</h1>
+      </div>
+      <div class="button-container" id="buttonContainer">
+        <button type="submit" class="login" id="login">Login</button>
+        <button type="submit" class="logout hide" id="logout">Logout</button>
+      </div>
+    </section>
+    <section class="lower-container" id="lowerContainer">
+      <div class="left-container" id="left-container">
+        <div class="dashboard-container" id="dashboardContainer">
+          <div class="past-bookings-container" id="pastBookingsContainer">
+            <h3 class="past-bookings-header" id="pastBookingsHeader"> Past Bookings </h3>
+          </div>
+          <div class="upcoming-bookings-container" id="upcomingBookingsContainer">
+            <h3 class="upcoming-bookings-header" id="upcomingBookingsHeader"> Upcoming Bookings </h3>
+          </div>
+          <div class="pending-bookings-container" id="pendingBookingsContainer">
+            <h3 class="pending-bookings-header" id="pendingBookingsHeader"> Pending Bookings </h3>
+          </div>
+        </div>
+        <div class="total-spent-container" id="totalSpentContainer">
+          <div class="total-spent-header" id="totalSpentHeader"> Your Total Amount Spent on Trips </div>
+          <div class="total-amount" id="totalAmount"></div>
+        </div>
+      </div>
+      <div class="planning-container" id="planningContainer">
+        <div class="planning-choices" id="planningChoices">
+          <div class="date-container" id="dateContainer">
+            <div class="date-header" id="dateHeader"> Date </div>
+          </div>
+          <div class="duration-container" id="durationContainer">
+            <div class="duration-header" id="durationHeader"> Duration </div>
+          </div>
+          <div class="num-travelers-container" id="numTravelersContainer">
+            <div class="num-travelers-header" id="numTravelersHeader"> Number of Travelers </div>
+          </div>
+          <div class="destinations-container" id="destinationsContainer">
+            <div class="destinations-header" id="destinationsHeader"> Destinations </div>
+          </div>
+        </div>
+        <button class="estimated-cost-button" id="estimatedCostButton"> Click to get your estimated cost </button>
+        <div class="estimated-cost-container" id="estimatedCostContainer">
+          <div class="estimated-cost-message" id="estimatedCostMessage"> The estimated cost for this adventure is: </div>
+        </div>
+        <button class="book-it-button" id="bookItButton"> #&127757, Book it! </button>
+      </div>
+    </section>
+  </section>
+  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
+
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 

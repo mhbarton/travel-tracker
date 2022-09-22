@@ -1,3 +1,204 @@
-body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+* {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.upper-container {
+  background-image: url('../images/world-background.jpg');
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  background-position: 0cm;
+  width: 100%;
+  margin: 0px;
+  opacity: 0.8;
+  padding-bottom: 30px;
+  border-radius: 10px;
+}
+
+.logo-info-container {
+  display: flex;
+  align-items: stretch;
+}
+
+.worldwide-logo {
+  display:flex;
+  height: 75px;
+  width: 75px;
+  padding-top: 225px;
+  margin-left: 50px;
+  float: left;
+  filter: invert(86%) sepia(32%) saturate(219%) hue-rotate(156deg) brightness(86%) contrast(101%);
+}
+
+.company-name{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  font-size: 45pt;
+  padding-top: 250px;
+  margin-left: 25px;
+  color: #ABD0DC;
+  font-size: 50px;
+}
+
+.lower-container{
+  display: flex;
+  flex-direction: row;
+  height: 50%;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  margin-right: 25px;
+  margin-top: 255px;
+}
+
+.login {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: #ABD0DC inset;
+  box-sizing: border-box;
+  color: #27445C;
+  cursor: pointer;
+  display: inline-flex;
+  height: 35px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  font-size: 18px;
+}
+
+.login:focus {
+  box-shadow: #ABD0DC inset;
+}
+
+.login:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #ABD0DC 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.login:active {
+  box-shadow: #ABD0DC 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.lower-container {
+  display: flex;
+  flex-direction: row
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border: 2px solid #ABD0DC;
+  border-radius: 10px;
+  background-color: #ABD0DC;
+  height: 50vh;
+  width: 50vw;
+  margin-top: 30px;
+}
+
+.past-bookings-container,
+.upcoming-bookings-container,
+.pending-bookings-container {
+  border: 2px solid #27445C;
+  border-radius: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.total-spent-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 2px solid #ABD0DC;
+  border-radius: 10px;
+  background-color: #ABD0DC;
+  height: 15vh;
+  width: 50vw;
+  margin-top: 30px;
+}
+
+.planning-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 2px solid #ABD0DC;
+  border-radius: 10px;
+  background-color: #ABD0DC;
+  height: 30vh;
+  width: 50vw;
+  margin-top: 30px;
+  margin-left: 15px;
+}
+
+.estimated-cost-button {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: #ABD0DC inset;
+  box-sizing: border-box;
+  color: #27445C;
+  cursor: pointer;
+  display: inline-flex;
+  height: 35px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.estimated-cost-button:focus {
+  box-shadow: #ABD0DC inset;
+}
+
+.estimated-cost-button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #ABD0DC 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.estimated-cost-button:active {
+  box-shadow: #ABD0DC 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.hide {
+  display: none;
 }
