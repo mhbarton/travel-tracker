@@ -10,10 +10,6 @@ class Trip {
     this.suggestedActivities = [];
   }
 
-  // findPastTrips(){
-  //
-  // }
-
   findDestination(traveler, tripsData, destinationsData){
     const newDestination = destinationsData.reduce((acc, current) => {
       traveler.returnTravelerTrips(tripsData).find(trip => {
@@ -25,7 +21,6 @@ class Trip {
     }, {})
     return newDestination
   }
-
 
   returnCostPerTrip(traveler, tripsData, destinationsData){
     const neededDestinationData = this.findDestination(traveler, tripsData, destinationsData);
@@ -40,8 +35,16 @@ class Trip {
     return totalCost
   };
 
-  returnCostForAllTrips(){
-
+  returnTotalCostPastYear(traveler, tripsData, destinationsData){
+    const presentYear = (new Date()).getFullYear().toString();
+    const neededData = this.findDestination(traveler, tripsData, destinationsData);
+    const allTripCost = traveler.returnPastTrips(tripsData).reduce((acc, current) => {
+      if(neededData.destinationID === current.destinationID && (current.date.split("/")[0]) === presentYear){
+        acc += this.returnCostPerTrip(traveler, tripsData, destinationsData)
+      }
+    return acc
+    }, 0)
+    return allTripCost
   }
 };
 

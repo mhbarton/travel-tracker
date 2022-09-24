@@ -82,13 +82,20 @@ describe('Traveler', () => {
     expect(traveler1.returnTravelerTrips(tripArray)).to.deep.equal([trip1, trip3]);
   });
 
+  it('Should find the most recent date', () => {
+    expect(traveler1.findCurrentDate()).to.deep.equal('2022/09/24');
+  });
+
   it('Should return all past trips for a traveler', () => {
-    expect(traveler1.returnPastTrips(tripArray)).to.deep.equal([trip3]);
+    expect(traveler1.returnPastTrips(tripArray)).to.deep.equal([trip1, trip3]);
   });
 
   it('Should return all upcoming trips for a traveler', () => {
-    expect(traveler1.returnPastTrips(tripArray)).to.deep.equal([trip3]);
+    expect(traveler2.returnUpcomingTrips(tripArray)).to.deep.equal([trip2]);
   });
 
+  it('Should return all pending trips for a traveler', () => {
+    expect(traveler2.returnPendingTrips(tripArray)).to.deep.equal([trip2]);
+  });
 
 });

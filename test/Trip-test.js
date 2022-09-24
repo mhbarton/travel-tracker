@@ -125,4 +125,8 @@ describe('Trip', () => {
   it('Should return the cost of a single trip', () => {
     expect(trip1.returnCostPerTrip(traveler1, tripArray, destinationArray)).to.equal(2189);
   });
+
+  it('Should return the total amount spent for the past year', () => {
+    expect(trip1.returnTotalCostPastYear(traveler1, tripArray, destinationArray)).to.equal(2189);
+  });
 });

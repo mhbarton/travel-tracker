@@ -12,28 +12,35 @@ class Traveler {
 
   returnTravelerTrips(tripsData){
     const allTrips = tripsData.filter(trip => this.id === trip.userID)
-    // console.log(allTrips)
     return allTrips
   };
 
-  returnPastTrips(tripsData) {
-    const presentYear = (new Date()).getFullYear().toString();
+  findCurrentDate() {
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
 
-    const pastTrips = this.returnTravelerTrips(tripsData).filter(trip => (trip.date.split('/')[0]) < presentYear)
+    today = yyyy + '/' + mm + '/' + dd;
+    return today;
+  };
+
+  returnPastTrips(tripsData) {
+    const pastTrips = this.returnTravelerTrips(tripsData).filter(trip => trip.date < this.findCurrentDate())
     return pastTrips
   };
 
   returnUpcomingTrips(tripsData) {
-    const presentYear = (new Date()).toString();
-    console.log(presentYear)
+    const currentDate = this.findCurrentDate()
 
-    const upcomingTrips = this.returnTravelerTrips(tripsData).filter(trip => (trip.date.split('/')[0]) > presentYear)
-    return pastTrips
+    const upcomingTrips = this.returnTravelerTrips(tripsData).filter(trip => trip.date > currentDate)
+    return upcomingTrips
   };
 
+  returnPendingTrips(tripsData){
+    const pendingTrips = this.returnTravelerTrips(tripsData).filter(trip => trip.status === 'pending')
+    return pendingTrips
+  };
 };
-
-
-
 
 export default Traveler;
