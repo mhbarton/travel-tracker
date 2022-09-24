@@ -27,14 +27,17 @@ class Trip {
   }
 
 
-  returnCostPerTrip(destination){
+  returnCostPerTrip(traveler, tripsData, destinationsData){
+    const neededDestinationData = this.findDestination(traveler, tripsData, destinationsData);
 
-    const costOfLodging = destination.estimatedLodgingCost * this.duration;
-    const costOfFlight = destination.estimatedFlightCost * this.travelers;
-    const tripCost = costOfLodging + costOfFlight;
-    const agentFee = tripCost * .10;
-    const totalCost = tripCost + agentFee
-    return totalCost;
+    const lodgingEachDay = neededDestinationData.estimatedLodgingCost;
+    const flightEachPerson = neededDestinationData.estimatedFlightCost;
+
+    const costOfLodging = lodgingEachDay * this.duration;
+    const costOfFlight = flightEachPerson * this.travelers;
+
+    const totalCost = (costOfLodging + costOfFlight) * 1.1;
+    return totalCost
   };
 
   returnCostForAllTrips(){

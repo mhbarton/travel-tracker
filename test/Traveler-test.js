@@ -40,7 +40,7 @@ describe('Traveler', () => {
               userID: 1,
               destinationID: 22,
               travelers: 4,
-              date: "2022/05/22",
+              date: "2021/05/22",
               duration: 17,
               status: "approved",
               suggestedActivities: [ ]
@@ -81,5 +81,10 @@ describe('Traveler', () => {
   it('Should return all trips for a traveler', () => {
     expect(traveler1.returnTravelerTrips(tripArray)).to.deep.equal([trip1, trip3]);
   });
+
+  it('Should return all past trips for a traveler', () => {
+    expect(traveler1.returnPastTrips(tripArray)).to.deep.equal([trip3]);
+  });
+
 
 });

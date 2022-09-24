@@ -123,6 +123,6 @@ describe('Trip', () => {
   });
 
   it('Should return the cost of a single trip', () => {
-    expect(trip1.returnCostPerTrip(destination1)).to.equal(1056);
+    expect(trip1.returnCostPerTrip(traveler1, tripArray, destinationArray)).to.equal(2189);
   });
 });
