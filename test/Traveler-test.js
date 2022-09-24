@@ -86,5 +86,9 @@ describe('Traveler', () => {
     expect(traveler1.returnPastTrips(tripArray)).to.deep.equal([trip3]);
   });
 
+  it('Should return all upcoming trips for a traveler', () => {
+    expect(traveler1.returnPastTrips(tripArray)).to.deep.equal([trip3]);
+  });
+
 
 });
