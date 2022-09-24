@@ -10,3 +10,14 @@ import './images/worldwide-logo.png'
 
 
 console.log('This is the JavaScript entry file - your code begins here.');
+
+
+
+// function generateRandomUser(userData) {
+//   let currentUserObj = userData[Math.floor(Math.random() * userData.length)];
+//   return currentUser = new User(currentUserObj);
+// };
+//
+// function welcomeUser() {
+//   welcomeUserName.innerText = `Hi, ${currentUser.returnUserFirstName()}!`
+// };
