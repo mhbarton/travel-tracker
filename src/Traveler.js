@@ -31,9 +31,7 @@ class Traveler {
   };
 
   returnUpcomingTrips(tripsData) {
-    const currentDate = this.findCurrentDate()
-
-    const upcomingTrips = this.returnTravelerTrips(tripsData).filter(trip => trip.date > currentDate)
+    const upcomingTrips = this.returnTravelerTrips(tripsData).filter(trip => trip.date > this.findCurrentDate())
     return upcomingTrips
   };
 

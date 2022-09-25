@@ -132,8 +132,8 @@
 .pending-bookings-container {
   border: 2px solid #27445C;
   border-radius: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-top: 5px;
   margin-bottom: 5px;
   overflow-x: hidden;
@@ -249,6 +249,12 @@
 .estimated-cost-button:active {
   box-shadow: #ABD0DC 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+.destination-image {
+  height: 100px;
+  width: 225px;
+  border-radius: 10px;
 }
 
 .hide {
