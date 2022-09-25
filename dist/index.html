@@ -40,25 +40,26 @@
         </div>
       </div>
       <div class="planning-container" id="planningContainer">
-        <div class="planning-choices" id="planningChoices">
-          <div class="date-container" id="dateContainer">
-            <div class="date-header" id="dateHeader"> Date </div>
-          </div>
-          <div class="duration-container" id="durationContainer">
-            <div class="duration-header" id="durationHeader"> Duration </div>
-          </div>
-          <div class="num-travelers-container" id="numTravelersContainer">
-            <div class="num-travelers-header" id="numTravelersHeader"> Number of Travelers </div>
-          </div>
-          <div class="destinations-container" id="destinationsContainer">
-            <div class="destinations-header" id="destinationsHeader"> Destinations </div>
-          </div>
-        </div>
-        <button class="estimated-cost-button" id="estimatedCostButton"> Click to get your estimated cost </button>
+        <h3 class="planning-header" id="planningHeader"> Let's plan a new trek! </h3>
+        <form class="planning-choices-form" id="planningChoicesForm" name="planningChoicesForm" autocomplete="off">
+          <label for="date">Date</label>
+          <input tabindex="0" type="date" id="activityDate" name="date"/>
+          <br><label for="duration">Duration</label>
+          <input tabindex="0" type="text" id="durationAmount" name="durationAmount" pattern="[0-9]+" title="Please enter numbers only"/>
+          <br><label for="numTravlers">Number of Travelers</label>
+          <input tabindex="0" type="text" id="numTravelers" name="numTravelers" pattern="[0-9]+" title="Please enter numbers only"/>
+          <br><label for="destinations">Destinations</label>
+          <input tabindex="0" type="text" id="destinations" name="destinations" pattern="[0-9]+" title="Please enter numbers only"/>
+          <br><button tabindex="0" type="submit" class="estimated-cost-button" id="estimatedCostButton">Click to get your estimated cost</button>
+        </form>
         <div class="estimated-cost-container" id="estimatedCostContainer">
           <div class="estimated-cost-message" id="estimatedCostMessage"> The estimated cost for this adventure is: </div>
+          <div class="trip-buttons" id="tripButtons">
+            <button class="book-it-button" id="bookItButton"> &#127757; Book it! </button>
+            <span> OR </span>
+            <button class="keep-searching-button" id="keepSearchingButton"> &#128270; Let's keep searching! </button>
+          </div>
         </div>
-        <button class="book-it-button" id="bookItButton"> &#127757; Book it! </button>
       </div>
     </section>
     <section class="login-view hide" id="loginView">
@@ -75,6 +76,5 @@
 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
