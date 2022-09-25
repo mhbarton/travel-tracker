@@ -16,7 +16,7 @@ class Traveler {
   };
 
   findCurrentDate() {
-    let today = new Date();
+    let today = new Date('2022/09/24');
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();

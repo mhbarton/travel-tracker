@@ -26,8 +26,8 @@ function startData() {
         allTravelerData = dataSet[0].travelers;
         allTripData = dataSet[1].trips;
         allDestinationData = dataSet[2].destinations;
-        // currentTrip = allTripData.map(trip => new Trip(trip))
-        currentTrip = new Trip(allTripData)
+        currentTrip = allTripData.map(trip => new Trip(trip))
+        // currentTrip = new Trip(allTripData)
         generatePageLoad();
   })
 };
@@ -112,9 +112,8 @@ function renderPendingBookings(){
 };
 
 function renderTotalAmount() {
-  console.log('jello')
-  const totalSpent = currentTrip.returnTotalCostPastYear(currentTraveler, allTripData, allDestinationData)
-  totalAmount.innerHTML += `<h4 class="total-spent"> $ ${totalSpent} </h4> `
+  currentTrip.returnTotalCostPastYear(currentTraveler, allTripData, allDestinationData)
+  totalAmount.innerHTML += `<h4 class="total-spent"> $ ${totalSpent} </h4>`
 }
 
 //HELPER FUNCTIONS
