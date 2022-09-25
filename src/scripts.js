@@ -16,6 +16,7 @@ let allTravelerData;
 let allTripData;
 let allDestinationData;
 let currentTraveler;
+let currentTrip;
 
 
 //FETCH PROMISE:
@@ -25,6 +26,8 @@ function startData() {
         allTravelerData = dataSet[0].travelers;
         allTripData = dataSet[1].trips;
         allDestinationData = dataSet[2].destinations;
+        // currentTrip = allTripData.map(trip => new Trip(trip))
+        currentTrip = new Trip(allTripData)
         generatePageLoad();
   })
 };
@@ -44,6 +47,7 @@ let welcomeTraveler = document.getElementById('welcomeTravelerMessage');
 let pastBookings = document.getElementById('pastBookingsInfo');
 let upcomingBookings = document.getElementById('upcomingBookingsInfo');
 let pendingBookings = document.getElementById('pendingBookingsInfo');
+let totalAmount = document.getElementById('totalAmount');
 
 
 //EVENT LISTENERS:
@@ -56,7 +60,8 @@ function generatePageLoad() {
   renderWelcomeTraveler()
   renderPastBookings();
   renderUpcomingBookings();
-  renderingPendingBookings();
+  renderPendingBookings();
+  renderTotalAmount();
 }
 
 function renderRandomUser() {
@@ -94,7 +99,7 @@ function renderUpcomingBookings(){
   return travelerUpcomingTrips;
 };
 
-function renderingPendingBookings(){
+function renderPendingBookings(){
   const travelerPendingTrips = currentTraveler.returnPendingTrips(allTripData).filter(trip => {
     allDestinationData.forEach(destination => {
       if(destination.id === trip.destinationID) {
@@ -106,9 +111,11 @@ function renderingPendingBookings(){
   return travelerPendingTrips;
 };
 
-
-
-
+function renderTotalAmount() {
+  console.log('jello')
+  const totalSpent = currentTrip.returnTotalCostPastYear(currentTraveler, allTripData, allDestinationData)
+  totalAmount.innerHTML += `<h4 class="total-spent"> $ ${totalSpent} </h4> `
+}
 
 //HELPER FUNCTIONS
 function hide(element) {
