@@ -59,7 +59,8 @@
   margin-top: 255px;
 }
 
-.login {
+.login,
+.logout {
   align-items: center;
   appearance: none;
   background-color: #FCFCFD;
@@ -87,16 +88,19 @@
   font-size: 18px;
 }
 
-.login:focus {
+.login:focus,
+.logout:focus {
   box-shadow: #ABD0DC inset;
 }
 
-.login:hover {
+.login:hover,
+.logout:hover {
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #ABD0DC 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
-.login:active {
+.login:active,
+.logout:active {
   box-shadow: #ABD0DC 0 3px 7px inset;
   transform: translateY(2px);
 }
@@ -136,6 +140,17 @@
   overflow-y: scroll;
 }
 
+.past-bookings-header,
+.upcoming-bookings-header,
+.pending-bookings-header {
+  border: 2px solid #27445C;
+  border-radius: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .total-spent-container {
   display: flex;
   flex-direction: row;
@@ -150,17 +165,44 @@
 
 .planning-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   border: 2px solid #ABD0DC;
   border-radius: 10px;
   background-color: #ABD0DC;
-  height: 30vh;
+  height: 60vh;
   width: 50vw;
   margin-top: 30px;
   margin-left: 15px;
+  padding-top: 0px;
 }
 
+.planning-choices-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  margin-bottom: 80px;
+}
+
+.planning-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.estimated-cost-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.estimated-cost-message {
+  margin-bottom: 55px;
+}
+
+.book-it-button,
+.keep-searching-button,
 .estimated-cost-button {
   align-items: center;
   appearance: none;
@@ -189,58 +231,22 @@
   font-size: 15px;
 }
 
-.estimated-cost-button:focus {
+.book-it-button:focus,
+.keep-searching-button:focus,
+.estimated-cost-button:focus  {
   box-shadow: #ABD0DC inset;
 }
 
+.book-it-button:hover,
+.keep-searching-button:hover,
 .estimated-cost-button:hover {
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #ABD0DC 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
+.book-it-button:active,
+.keep-searching-button:active,
 .estimated-cost-button:active {
-  box-shadow: #ABD0DC 0 3px 7px inset;
-  transform: translateY(2px);
-}
-
-.book-it-button {
-  align-items: center;
-  appearance: none;
-  background-color: #FCFCFD;
-  border-radius: 4px;
-  border-width: 0;
-  box-shadow: #ABD0DC inset;
-  box-sizing: border-box;
-  color: #27445C;
-  cursor: pointer;
-  display: inline-flex;
-  height: 35px;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  font-size: 15px;
-}
-
-.book-it-button:focus {
-  box-shadow: #ABD0DC inset;
-}
-
-.book-it-button:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #ABD0DC 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.book-it-button:active {
   box-shadow: #ABD0DC 0 3px 7px inset;
   transform: translateY(2px);
 }

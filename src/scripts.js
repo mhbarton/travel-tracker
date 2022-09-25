@@ -16,6 +16,7 @@ console.log('This is the JavaScript entry file - your code begins here.');
 let allTravelerData;
 let allTripData;
 let allDestinationData;
+let currentTraveler;
 
 
 //FETCH PROMISE:
@@ -40,7 +41,7 @@ function startData() {
 // };
 
 
-//QUERY SELECTORS
+//QUERY SELECTORS:
 
 
 //EVENT LISTENERS:
@@ -48,14 +49,30 @@ window.addEventListener('load', startData);
 
 
 
+//FUNCTIONS:
+function generatePageLoad(userData) {
+  currentUser = generateRandomUser(userData.userData);
+  welcomeUser(currentUser)
+  renderMyInfo(currentUser);
+  renderMyFriends(currentUser, userData.userData);
+  renderMyStepGoal(currentUser);
+  renderAvgStepGoal(userData);
+}
 
+function generateRandomUser(travelerData) {
+  let currentTravelerObj = travelerData[Math.floor(Math.random() * travelerData.length)];
+  return currentTraveler = new Traveler(currentTravelerObj);
+};
 
+function welcomeUser() {
+  welcomeUserName.innerText = `Hi, ${currentUser.returnUserFirstName()}!`
+};
 
-// function generateRandomUser(userData) {
-//   let currentUserObj = userData[Math.floor(Math.random() * userData.length)];
-//   return currentUser = new User(currentUserObj);
-// };
-//
-// function welcomeUser() {
-//   welcomeUserName.innerText = `Hi, ${currentUser.returnUserFirstName()}!`
-// };
+//HELPER FUNCTIONS
+function hide(element) {
+  element.classList.add('hide');
+};
+
+function unhide(element) {
+  element.classList.remove('hide');
+};
