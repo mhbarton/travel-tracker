@@ -1,6 +1,6 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import { fetchData } from './apiCalls.js';
+import { fetchData, fetchPost } from './apiCalls.js';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 // import './images/turing-logo.png'
@@ -16,7 +16,7 @@ let allTravelerData;
 let allTripData;
 let allDestinationData;
 let currentTraveler;
-let currentTrip;
+// let currentTrip;
 
 
 //FETCH PROMISE:
@@ -26,20 +26,20 @@ function startData() {
         allTravelerData = dataSet[0].travelers;
         allTripData = dataSet[1].trips;
         allDestinationData = dataSet[2].destinations;
-        currentTrip = allTripData.map(trip => new Trip(trip))
+        // currentTrip = allTripData.map(trip => new Trip(trip))
         // currentTrip = new Trip(allTripData)
         generatePageLoad();
   })
 };
-//
-// function updateData() {
-//   Promise.all([fetchData('sleep', 'sleepData'), fetchData('hydration', 'hydrationData'), fetchData('activity', 'activityData')])
-//     .then((dataSet) => {
-//       allSleepData = dataSet[0];
-//       allHydrationData = dataSet[1];
-//       allActivityData = dataSet[2];
-//   })
-// };
+
+function updateData() {
+  Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
+    .then((dataSet) => {
+      allTravelerData = dataSet[0].travelers;
+      allTripData = dataSet[1].trips;
+      allDestinationData = dataSet[2].destinations;
+  })
+};
 
 
 //QUERY SELECTORS:
@@ -48,27 +48,38 @@ let pastBookings = document.getElementById('pastBookingsInfo');
 let upcomingBookings = document.getElementById('upcomingBookingsInfo');
 let pendingBookings = document.getElementById('pendingBookingsInfo');
 let totalAmount = document.getElementById('totalAmount');
-
+let destinationOptions = document.getElementById('destinations');
+let loginButton = document.getElementById('login');
+let logoutButton = document.getElementById('logout');
+let estimatedCostButton = document.getElementById('estimatedCostButton');
+let bookItButton = document.getElementById('bookItButton');
+let durationInput = document.getElementById('durationAmount');
+let numTravelersInput = document.getElementById('numTravelers');
+let estimatedNewTripCost = document.getElementById('newTripCost');
+let estimatedCostContainer = document.getElementById('estimatedCostContainer');
 
 //EVENT LISTENERS:
 window.addEventListener('load', startData);
+estimatedCostButton.addEventListener('click', showEstimate);
+// bookItButton.addEventListener('click', updateTravelerTrips);
 
 
 //FUNCTIONS:
 function generatePageLoad() {
-  renderRandomUser();
+  renderRandomTraveler();
   renderWelcomeTraveler()
   renderPastBookings();
   renderUpcomingBookings();
   renderPendingBookings();
   renderTotalAmount();
+  populateDestinationOptions()
+  hide(loginButton);
+  unhide(logoutButton);
 }
 
-function renderRandomUser() {
+function renderRandomTraveler() {
   let currentTravelerObj = allTravelerData[Math.floor(Math.random() * allTravelerData.length)];
   return currentTraveler = new Traveler(currentTravelerObj);
-  // console.log(allTravelerData[1])
-  // currentTraveler = new Traveler(allTravelerData[1])
 };
 
 function renderWelcomeTraveler() {
@@ -111,10 +122,42 @@ function renderPendingBookings(){
   return travelerPendingTrips;
 };
 
+
+
 function renderTotalAmount() {
-  currentTrip.returnTotalCostPastYear(currentTraveler, allTripData, allDestinationData)
-  totalAmount.innerHTML += `<h4 class="total-spent"> $ ${totalSpent} </h4>`
+  const presentYear = (new Date()).getFullYear().toString();
+  const amount = currentTraveler.returnTravelerTrips(allTripData).reduce((total, trip) => {
+    allDestinationData.forEach(destination => {
+      if((trip.destinationID === destination.id) && (trip.date.split("/")[0]) === presentYear) {
+      total += ((trip.duration * destination.estimatedLodgingCostPerDay) +
+        (trip.travelers * destination.estimatedFlightCostPerPerson)) * 1.1;
+      }
+    })
+    return total
+  }, 0)
+  return totalAmount.innerHTML += `<h4 class="total-spent"> $ ${amount.toFixed(2)} </h4>`
 }
+
+function populateDestinationOptions() {
+    allDestinationData.forEach(destination => {
+        destinationOptions.innerHTML +=  `<option>${destination.destination}</option>`
+    });
+};
+
+function showEstimate(event) {
+  event.preventDefault();
+  createNewTrip();
+  unhide(estimatedCostContainer);
+}
+
+function createNewTrip() {
+ const returnDestinations = allDestinationData.find(destination => destination.destination === destinationOptions.value);
+ const newTripEstimate =  ((returnDestinations.estimatedLodgingCostPerDay * durationInput.value) +
+     (returnDestinations.estimatedFlightCostPerPerson * numTravelersInput.value) * 1.1);
+
+     return estimatedNewTripCost.innerHTML = `$ ${newTripEstimate.toFixed(2)}`
+   }
+   
 
 //HELPER FUNCTIONS
 function hide(element) {

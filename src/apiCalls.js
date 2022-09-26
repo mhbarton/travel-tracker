@@ -5,29 +5,28 @@ return fetch(`http://localhost:3001/api/v1/${dataFileName}`)
   .catch(err => console.log("Oh no! There\'s an error!"))
 };
 
-// const fetchPost = (url, initObject) => {
-//   return fetch(`http://localhost:3001/api/v1/${url}`, {
-//     method: 'POST',
-//     headers: {'Content-Type': 'application/json'},
-//     body: JSON.stringify(initObject)
-//   })
-//     .then(response => handleErrors(response))
-//     .then(response => response.json())
-//     .catch(err => showErrorMessage())
-// };
-//
-// function handleErrors(response) {
-//   if (!response.ok) {
-//     throw Error(response.statusText);
-//   } else {
-//   return response;
-//   }
-// }
-//
-// function showErrorMessage() {
-//  alert('There was an error!')
-// }
+const fetchPost = (newData, initObject) => {
+  return fetch(`http://localhost:3001/api/v1/${newData}`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(initObject)
+  })
+    .then(response => handleErrors(response))
+    .then(response => response.json())
+    .catch(err => showErrorMessage())
+};
 
-export { fetchData }
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  } else {
+    updateData()
+    return response;
+  }
+}
 
-// export { fetchData, fetchPost }
+function showErrorMessage() {
+  console.log("Oops, there looks like there's an error")
+}
+
+export { fetchData, fetchPost }

@@ -197,6 +197,22 @@
   align-items: center;
 }
 
+.total-spent-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total-spent-header,
+.total-amount,
+.agent-note {
+  margin: -20px;
+}
+
+.agent-note {
+  font-size: 15px;
+}
+
 .estimated-cost-message {
   margin-bottom: 55px;
 }
@@ -261,7 +277,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 35px;
+  font-size: 40px;
+}
+
+.quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  margin-top: 65px;
 }
 
 .hide {
