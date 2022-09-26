@@ -49,15 +49,16 @@
           <h3 class="planning-header" id="planningHeader"> Let's plan a new trek! </h3>
           <form class="planning-choices-form" id="planningChoicesForm" name="planningChoicesForm" autocomplete="off">
             <label for="date">Date</label>
-            <input tabindex="0" type="date" id="travelDate" name="date"/>
-            <br><label for="duration">Duration</label>
-            <input tabindex="0" type="text" id="durationAmount" name="durationAmount" pattern="[0-9]+" title="Please enter numbers only"/>
-            <br><label for="numTravlers">Number of Travelers</label>
-            <input tabindex="0" type="text" id="numTravelers" name="numTravelers" pattern="[0-9]+" title="Please enter numbers only"/>
-            <br><label for="destination">Destinations</label>
-            <select name="destinations" id="destinations">
+            <input aria-label="date-input-box" tabindex="0" type="date" id="travelDate" name="date"/><br>
+            <label for="duration">Duration</label><br>
+            <input aria-label="duration-input-box"tabindex="0" type="text" id="durationAmount" name="durationAmount" pattern="[0-9]+" title="Please enter numbers only"/>
+            <label for="numTravlers">Number of Travelers</label><br>
+            <input aria-label="numTravelers-input-box" tabindex="0" type="text" id="numTravelers" name="numTravelers" pattern="[0-9]+" title="Please enter numbers only"/>
+            <label for="destination">Destinations</label><br>
+            <select aria-label="destinations-input-box" name="destinations" id="destinations">
             <option disabled selected>Destination</option>
             </select>
+            <div class="incorrect-input-message" id="incorrectInputMessage"></div>
             <br><button tabindex="0" type="submit" class="estimated-cost-button" id="estimatedCostButton">Click to get your estimated cost</button>
           </form>
           <div class="estimated-cost-container hide" id="estimatedCostContainer">

@@ -34,7 +34,7 @@ function updateData() {
       allTravelerData = dataSet[0].travelers;
       allTripData = dataSet[1].trips;
       allDestinationData = dataSet[2].destinations;
-      renderNewPendingBookings()
+      renderNewPendingBookings();
   })
 };
 
@@ -56,6 +56,8 @@ let estimatedNewTripCost = document.getElementById('newTripCost');
 let estimatedCostContainer = document.getElementById('estimatedCostContainer');
 let planningChoicesForm = document.getElementById('planningChoicesForm');
 let tripDateInput = document.getElementById('travelDate');
+let incorrectInput = document.getElementById('incorrectInputMessage');
+let confirmation = document.querySelector('.confirmation-message');
 
 //EVENT LISTENERS:
 window.addEventListener('load', startData);
@@ -101,7 +103,7 @@ function renderPastBookings(){
 function renderUpcomingBookings(){
   const travelerUpcomingTrips = currentTraveler.returnUpcomingTrips(allTripData).filter(trip => {
     allDestinationData.forEach(destination => {
-      if(destination.id === trip.destinationID) {
+      if(destination.id === trip.destinationID && trip.status === 'approved') {
         upcomingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
         <h4 class="destination-name"> ${destination.destination}</h4>`
       }
@@ -145,15 +147,20 @@ function populateDestinationOptions() {
 function showEstimate(event) {
   event.preventDefault();
   createNewTrip();
-  unhide(estimatedCostContainer);
 };
 
 function createNewTrip() {
- const returnDestinations = allDestinationData.find(destination => destination.destination === destinationOptions.value);
- const newTripEstimate =  ((returnDestinations.estimatedLodgingCostPerDay * durationInput.value) +
+  const returnDestinations = allDestinationData.find(destination => destination.destination === destinationOptions.value);
+  if(tripDateInput.value === '' || durationInput.value === '' || numTravelersInput.value === '' || returnDestinations === '') {
+    return incorrectInput.innerHTML = "Please fill out all input fields";
+  } else {
+    incorrectInput.innerHTML = ''
+    unhide(estimatedCostContainer)
+    const newTripEstimate =  ((returnDestinations.estimatedLodgingCostPerDay * durationInput.value) +
      (returnDestinations.estimatedFlightCostPerPerson * numTravelersInput.value) * 1.1);
 
-     return estimatedNewTripCost.innerHTML = `$ ${newTripEstimate.toFixed(2)}`
+    return estimatedNewTripCost.innerHTML = `$ ${newTripEstimate.toFixed(2)}`
+  }
 };
 
 function bookNewTrip() {
@@ -163,8 +170,7 @@ function bookNewTrip() {
   const formattedDate = tripDateInput.value.split("-").join("/")
   let newTripData = {id:tripID, userID: travelerID, destinationID: destinationID, travelers: parseInt(numTravelersInput.value), date: formattedDate, duration: parseInt(durationInput.value), status: "pending", suggestedActivities: []}
   fetchPost('trips', newTripData)
-    // .then(data => showConfirmationMessage())
-    .then(data => updateData())
+    .then(data => updateData());
   clearForm();
   hide(estimatedCostContainer);
 };
@@ -173,8 +179,6 @@ function renderNewPendingBookings() {
   pendingBookings.innerHTML = ''
   const newPendingTrips = currentTraveler.returnPendingTrips(allTripData).filter(trip => {
     allDestinationData.forEach(destination => {
-      console.log('trip', trip)
-      console.log('ct', currentTraveler.returnPendingTrips(allTripData))
       if(destination.id === trip.destinationID && (!currentTraveler.returnPendingTrips(allTripData).includes(trip.id))) {
         pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
         <h4 class="destination-name"> ${destination.destination}</h4>`
@@ -201,6 +205,3 @@ function hide(element) {
 function unhide(element) {
   element.classList.remove('hide');
 };
-
-
-// push new trip newTripData into the array of traveler's trips
