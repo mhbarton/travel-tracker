@@ -22,7 +22,7 @@
       </div>
     </section>
     <section class="lower-container" id="lowerContainer">
-      <div class="left-container" id="left-container">
+      <section class="left-container" id="left-container">
         <h2 class="welcome-traveler-message" id="welcomeTravelerMessage"></h2>
         <div class="dashboard-container" id="dashboardContainer">
           <div class="past-bookings-container" id="pastBookingsContainer">
@@ -39,34 +39,42 @@
           </div>
         </div>
         <div class="total-spent-container" id="totalSpentContainer">
-          <div class="total-spent-header" id="totalSpentHeader"> Your Total Amount Spent on Trips </div>
-          <section class="total-amount" id="totalAmount"></section>
-            <div class="agent-note" id="agentNote">This includes the 10% travel agent fee.</div>
+          <div class="total-spent-header" id="totalSpentHeader"> Your Total Amount Spent on Trips </div></br>
+            <span class="total-amount" id="totalAmount"></span>
+          <div class="agent-note" id="agentNote">This includes the 10% travel agent fee.</div>
         </div>
-      </div>
-      <div class="planning-container" id="planningContainer">
-        <h3 class="planning-header" id="planningHeader"> Let's plan a new trek! </h3>
-        <form class="planning-choices-form" id="planningChoicesForm" name="planningChoicesForm" autocomplete="off">
-          <label for="date">Date</label>
-          <input tabindex="0" type="date" id="activityDate" name="date"/>
-          <br><label for="duration">Duration</label>
-          <input tabindex="0" type="text" id="durationAmount" name="durationAmount" pattern="[0-9]+" title="Please enter numbers only"/>
-          <br><label for="numTravlers">Number of Travelers</label>
-          <input tabindex="0" type="text" id="numTravelers" name="numTravelers" pattern="[0-9]+" title="Please enter numbers only"/>
-          <br><label for="destinations">Destinations</label>
-          <input tabindex="0" type="text" id="destinations" name="destinations" pattern="[0-9]+" title="Please enter numbers only"/>
-          <br><button tabindex="0" type="submit" class="estimated-cost-button" id="estimatedCostButton">Click to get your estimated cost</button>
-        </form>
-        <div class="estimated-cost-container hide" id="estimatedCostContainer">
-          <div class="estimated-cost-message" id="estimatedCostMessage"> The estimated cost for this adventure is: </div>
-          <div class="trip-buttons" id="tripButtons">
-            <button class="book-it-button" id="bookItButton"> &#127757; Book it! </button>
-            <span> OR </span>
-            <button class="keep-searching-button" id="keepSearchingButton"> &#128270; Let's keep searching! </button>
+      </section>
+      <section class="right-container" id="rightContainer">
+        <section class="planning-container" id="planningContainer">
+          <h3 class="planning-header" id="planningHeader"> Let's plan a new trek! </h3>
+          <form class="planning-choices-form" id="planningChoicesForm" name="planningChoicesForm" autocomplete="off">
+            <label for="date">Date</label>
+            <input tabindex="0" type="date" id="travelDate" name="date"/>
+            <br><label for="duration">Duration</label>
+            <input tabindex="0" type="text" id="durationAmount" name="durationAmount" pattern="[0-9]+" title="Please enter numbers only"/>
+            <br><label for="numTravlers">Number of Travelers</label>
+            <input tabindex="0" type="text" id="numTravelers" name="numTravelers" pattern="[0-9]+" title="Please enter numbers only"/>
+            <br><label for="destination">Destinations</label>
+            <select name="destinations" id="destinations">
+            <option disabled selected>Destination</option>
+            </select>
+            <br><button tabindex="0" type="submit" class="estimated-cost-button" id="estimatedCostButton">Click to get your estimated cost</button>
+          </form>
+          <div class="estimated-cost-container hide" id="estimatedCostContainer">
+            <div class="estimated-cost-message" id="estimatedCostMessage"> The estimated cost for this adventure is: </div></br>
+              <span class="new-trip-cost" id="newTripCost"></span>
+              <span class="fee-reminder" id="feeReminder">Please remember this includes our agent fee.</span>
+            <div class="trip-buttons" id="tripButtons">
+              <button class="book-it-button" id="bookItButton"> &#127757; Book it! </button>
+              <span> OR </span>
+              <button class="keep-searching-button" id="keepSearchingButton"> &#128270; Let's keep searching! </button>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+        <section class="quote-container" id="quote-container">
+          <h3 class="quote-header" id="quoteHeader"> “I haven’t been everywhere, but it’s on my list.” – Susan Sontag</h3>
+        </section>
+      </section>
     <section class="login-view hide" id="loginView">
       <div class="login-container" id="loginContainer">
         <label for="uname"><b>Username</b></label>
