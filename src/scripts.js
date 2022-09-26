@@ -161,7 +161,7 @@ function bookNewTrip() {
   const travelerID = currentTraveler.id;
   const destinationID = allDestinationData.find(destination => destination.destination === destinationOptions.value).id;
   const formattedDate = tripDateInput.value.split("-").join("/")
-  let newTripData = {id:tripID, userID: travelerID, destination: destinationID, travelers: parseInt(numTravelersInput.value), date: formattedDate, duration: parseInt(durationInput.value), status: "pending"}
+  let newTripData = {id:tripID, userID: travelerID, destinationID: destinationID, travelers: parseInt(numTravelersInput.value), date: formattedDate, duration: parseInt(durationInput.value), status: "pending", suggestedActivities: []}
   fetchPost('trips', newTripData)
     // .then(data => showConfirmationMessage())
     .then(data => updateData())
@@ -169,17 +169,20 @@ function bookNewTrip() {
   hide(estimatedCostContainer);
 };
 
-// function renderNewPendingBookings(){
-//   const newPendingTrips = currentTraveler.returnPendingTrips(allTripData).filter(trip => {
-//     allDestinationData.forEach(destination => {
-//       if(destination.id === trip.destinationID) {
-//         pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
-//         <h4 class="destination-name"> ${destination.destination}</h4>`
-//       }
-//     })
-//   })
-//   return newPendingTrips;
-// };
+function renderNewPendingBookings() {
+  pendingBookings.innerHTML = ''
+  const newPendingTrips = currentTraveler.returnPendingTrips(allTripData).filter(trip => {
+    allDestinationData.forEach(destination => {
+      console.log('trip', trip)
+      console.log('ct', currentTraveler.returnPendingTrips(allTripData))
+      if(destination.id === trip.destinationID && (!currentTraveler.returnPendingTrips(allTripData).includes(trip.id))) {
+        pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
+        <h4 class="destination-name"> ${destination.destination}</h4>`
+      }
+    })
+  })
+  return newPendingTrips;
+};
 
 function refreshForm() {
   clearForm();
@@ -198,3 +201,6 @@ function hide(element) {
 function unhide(element) {
   element.classList.remove('hide');
 };
+
+
+// push new trip newTripData into the array of traveler's trips
