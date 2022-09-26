@@ -18,15 +18,16 @@ const fetchPost = (newData, initObject) => {
 
 function handleErrors(response) {
   if (!response.ok) {
-    throw Error(response.statusText);
+    throw new Error(
+      "Uh oh, it looks like we are having some difficulty with your request!"
+    );
   } else {
-    updateData()
     return response;
   }
 }
 
 function showErrorMessage() {
-  console.log("Oops, there looks like there's an error")
+  console.log("Oops, it looks like there's an error")
 }
 
 export { fetchData, fetchPost }

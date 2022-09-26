@@ -16,8 +16,6 @@ let allTravelerData;
 let allTripData;
 let allDestinationData;
 let currentTraveler;
-// let currentTrip;
-
 
 //FETCH PROMISE:
 function startData() {
@@ -26,8 +24,6 @@ function startData() {
         allTravelerData = dataSet[0].travelers;
         allTripData = dataSet[1].trips;
         allDestinationData = dataSet[2].destinations;
-        // currentTrip = allTripData.map(trip => new Trip(trip))
-        // currentTrip = new Trip(allTripData)
         generatePageLoad();
   })
 };
@@ -38,9 +34,9 @@ function updateData() {
       allTravelerData = dataSet[0].travelers;
       allTripData = dataSet[1].trips;
       allDestinationData = dataSet[2].destinations;
+      renderNewPendingBookings()
   })
 };
-
 
 //QUERY SELECTORS:
 let welcomeTraveler = document.getElementById('welcomeTravelerMessage');
@@ -53,15 +49,19 @@ let loginButton = document.getElementById('login');
 let logoutButton = document.getElementById('logout');
 let estimatedCostButton = document.getElementById('estimatedCostButton');
 let bookItButton = document.getElementById('bookItButton');
+let keepSearchingButton = document.getElementById('keepSearchingButton');
 let durationInput = document.getElementById('durationAmount');
 let numTravelersInput = document.getElementById('numTravelers');
 let estimatedNewTripCost = document.getElementById('newTripCost');
 let estimatedCostContainer = document.getElementById('estimatedCostContainer');
+let planningChoicesForm = document.getElementById('planningChoicesForm');
+let tripDateInput = document.getElementById('travelDate');
 
 //EVENT LISTENERS:
 window.addEventListener('load', startData);
 estimatedCostButton.addEventListener('click', showEstimate);
-// bookItButton.addEventListener('click', updateTravelerTrips);
+bookItButton.addEventListener('click', bookNewTrip);
+keepSearchingButton.addEventListener('click', refreshForm);
 
 
 //FUNCTIONS:
@@ -122,8 +122,6 @@ function renderPendingBookings(){
   return travelerPendingTrips;
 };
 
-
-
 function renderTotalAmount() {
   const presentYear = (new Date()).getFullYear().toString();
   const amount = currentTraveler.returnTravelerTrips(allTripData).reduce((total, trip) => {
@@ -136,7 +134,7 @@ function renderTotalAmount() {
     return total
   }, 0)
   return totalAmount.innerHTML += `<h4 class="total-spent"> $ ${amount.toFixed(2)} </h4>`
-}
+};
 
 function populateDestinationOptions() {
     allDestinationData.forEach(destination => {
@@ -148,7 +146,7 @@ function showEstimate(event) {
   event.preventDefault();
   createNewTrip();
   unhide(estimatedCostContainer);
-}
+};
 
 function createNewTrip() {
  const returnDestinations = allDestinationData.find(destination => destination.destination === destinationOptions.value);
@@ -156,10 +154,43 @@ function createNewTrip() {
      (returnDestinations.estimatedFlightCostPerPerson * numTravelersInput.value) * 1.1);
 
      return estimatedNewTripCost.innerHTML = `$ ${newTripEstimate.toFixed(2)}`
-   }
-   
+};
+
+function bookNewTrip() {
+  const tripID = allTripData.sort((a,b) => b.id -a.id)[0].id + 1;
+  const travelerID = currentTraveler.id;
+  const destinationID = allDestinationData.find(destination => destination.destination === destinationOptions.value).id;
+  const formattedDate = tripDateInput.value.split("-").join("/")
+  let newTripData = {id:tripID, userID: travelerID, destination: destinationID, travelers: parseInt(numTravelersInput.value), date: formattedDate, duration: parseInt(durationInput.value), status: "pending"}
+  fetchPost('trips', newTripData)
+    // .then(data => showConfirmationMessage())
+    .then(data => updateData())
+  clearForm();
+  hide(estimatedCostContainer);
+};
+
+// function renderNewPendingBookings(){
+//   const newPendingTrips = currentTraveler.returnPendingTrips(allTripData).filter(trip => {
+//     allDestinationData.forEach(destination => {
+//       if(destination.id === trip.destinationID) {
+//         pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
+//         <h4 class="destination-name"> ${destination.destination}</h4>`
+//       }
+//     })
+//   })
+//   return newPendingTrips;
+// };
+
+function refreshForm() {
+  clearForm();
+  hide(estimatedCostContainer);
+};
 
 //HELPER FUNCTIONS
+function clearForm() {
+  planningChoicesForm.reset();
+};
+
 function hide(element) {
   element.classList.add('hide');
 };
