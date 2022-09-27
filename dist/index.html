@@ -20,12 +20,11 @@
         <h1 class="company-name" id="companyName">GlobeTrekker</h1>
       </div>
       <div class="button-container" id="buttonContainer">
-        <button type="submit" class="login" id="login">Login</button>
         <button type="submit" class="logout hide" id="logout">Logout</button>
       </div>
     </section>
     <section class="lower-container" id="lowerContainer">
-      <section class="left-container" id="left-container">
+      <section class="left-container hide" id="left-container">
         <h2 class="welcome-traveler-message" id="welcomeTravelerMessage"></h2>
         <div class="dashboard-container" id="dashboardContainer">
           <div class="past-bookings-container" id="pastBookingsContainer">
@@ -47,7 +46,7 @@
           <div class="agent-note" id="agentNote">This includes the 10% travel agent fee.</div>
         </div>
       </section>
-      <section class="right-container" id="rightContainer">
+      <section class="right-container hide" id="rightContainer">
         <section class="planning-container" id="planningContainer">
           <h3 class="planning-header" id="planningHeader"> Let's plan a new trek! </h3>
           <form class="planning-choices-form" id="planningChoicesForm" name="planningChoicesForm" autocomplete="off">
@@ -76,18 +75,21 @@
           </div>
         </section>
         <section class="quote-container" id="quote-container">
-          <h3 class="quote-header" id="quoteHeader"> “I haven’t been everywhere, but it’s on my list.” – Susan Sontag</h3>
+          <h3 class="quote-header" id="quoteHeader"> “I haven’t been everywhere, but it’s on my list.” – Susan Sontag </h3>
         </section>
       </section>
-    <section class="login-view hide" id="loginView">
-      <div class="login-container" id="loginContainer">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="Password" required>
-        <button type="submit" class="login-submit-button" id="loginSubmitButton">Login</button>
-      </div>
-    </section>
+      <section class="large-login-container">
+        <section class="login-container" id="loginContainer">
+          <div class="login-view" id="loginView">
+            <label for="uname"><b>Username</b></label>
+            <input class="username" id="username" type="text" placeholder="Enter Username" name="username" required>
+            <label for="psw"><b>Password</b></label>
+            <input class="password" id="password" type="password" placeholder="Enter Password" name="Password" required>
+            <button type="submit" class="login-submit-button" id="loginSubmitButton">Login</button>
+            <div class="login-error-message hide" id="loginErrorMessage"> Username and/or Password is incorrect!</div>
+          </div>
+        </section>
+      </section>
   </section>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
 
