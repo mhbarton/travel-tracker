@@ -301,6 +301,22 @@
   padding-top: -20px;
 }
 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ABD0DC;
+  border-radius: 10px;
+  background-color: #ABD0DC;
+  height: 25vh;
+  width: 20vw;
+}
+
+.login-view {
+  display: flex;
+  flex-direction: column;
+}
+
 .hide {
   display: none;
 }

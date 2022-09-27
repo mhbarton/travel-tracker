@@ -12,6 +12,7 @@ let allTravelerData;
 let allTripData;
 let allDestinationData;
 let currentTraveler;
+let travelerID;
 
 //FETCH PROMISE:
 function startData() {
@@ -41,7 +42,7 @@ let upcomingBookings = document.getElementById('upcomingBookingsInfo');
 let pendingBookings = document.getElementById('pendingBookingsInfo');
 let totalAmount = document.getElementById('totalAmount');
 let destinationOptions = document.getElementById('destinations');
-let loginButton = document.getElementById('login');
+let loginButton = document.getElementById('loginSubmitButton');
 let logoutButton = document.getElementById('logout');
 let estimatedCostButton = document.getElementById('estimatedCostButton');
 let bookItButton = document.getElementById('bookItButton');
@@ -53,10 +54,16 @@ let estimatedCostContainer = document.getElementById('estimatedCostContainer');
 let planningChoicesForm = document.getElementById('planningChoicesForm');
 let tripDateInput = document.getElementById('travelDate');
 let incorrectInput = document.getElementById('incorrectInputMessage');
-let confirmation = document.querySelector('.confirmation-message');
+let leftContainer = document.querySelector('.left-container');
+let rightContainer = document.querySelector('.right-container');
+let loginContainer = document.querySelector('.login-container');
+let usernameInput = document.getElementById('username');
+let passwordInput = document.getElementById('password');
+let loginErrorMessage = document.querySelector('.login-error-message');
 
 //EVENT LISTENERS:
-window.addEventListener('load', startData);
+// window.addEventListener('load', startData);
+loginButton.addEventListener('click', getDashboard);
 estimatedCostButton.addEventListener('click', showEstimate);
 bookItButton.addEventListener('click', bookNewTrip);
 keepSearchingButton.addEventListener('click', refreshForm);
@@ -64,15 +71,13 @@ keepSearchingButton.addEventListener('click', refreshForm);
 
 //FUNCTIONS:
 function generatePageLoad() {
-  renderRandomTraveler();
-  renderWelcomeTraveler()
+  // renderRandomTraveler();
+  // renderWelcomeTraveler()
   renderPastBookings();
   renderUpcomingBookings();
   renderPendingBookings();
   renderTotalAmount();
   populateDestinationOptions()
-  hide(loginButton);
-  unhide(logoutButton);
 }
 
 function renderRandomTraveler() {
@@ -186,10 +191,38 @@ function renderNewPendingBookings() {
 };
 
 function refreshForm() {
-  keepSearchingButton.classList.add('wiggle');
   clearForm();
   hide(estimatedCostContainer);
 };
+
+// function checkLogin(event) {
+//   event.preventDefault();
+//   if (usernameInput.value === "" || passwordInput.value === "") {
+//     loginErrorMessage.innerText = `Please enter both username and password.`;
+//   } else if (passwordInput.value !== "travel") {
+//     loginErrorMessage.innerText = `Incorrect Password`;
+//   } else if (!usernameInput.value.includes("traveler")) {
+//     loginErrorMessage.innerText = `That username does not exist; try again.`;
+//   } else {
+//     loginErrorMessage.innerText = '';
+//     leftContainer.classList.remove('hide')
+//     rightContainer.classList.remove('hide')
+//     loginContainer.classList.add('hide')
+//     startData();
+//     }
+//   }
+function getDashboard() {
+  event.preventDefault()
+  if(usernameInput.value.length === 10 && usernameInput.value.includes('traveler') && parseInt(usernameInput.value.substring(8, 10)) <= 50 && passwordInput.value === 'travel') {
+    currentTraveler = parseInt(usernameInput.value.substring(8,10))
+    rightContainer.classList.remove('hide');
+    leftContainer.classList.remove('hide');
+    loginContainer.classList.add('hide');
+  } else {
+    loginMessageError.classList.remove('hide');
+  }
+  startData()
+}
 
 //HELPER FUNCTIONS
 function clearForm() {
