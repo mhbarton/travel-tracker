@@ -59,7 +59,7 @@
   margin-top: 255px;
 }
 
-.login,
+.login-submit-button,
 .logout {
   align-items: center;
   appearance: none;
@@ -88,21 +88,25 @@
   font-size: 18px;
 }
 
-.login:focus,
+.login-submit-button:focus,
 .logout:focus {
   box-shadow: #ABD0DC inset;
 }
 
-.login:hover,
+.login-submit-button:hover,
 .logout:hover {
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #ABD0DC 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
-.login:active,
+.login-submit-button:active,
 .logout:active {
   box-shadow: #ABD0DC 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+.login-submit-button {
+  margin-top: 15px;
 }
 
 .lower-container {
@@ -301,6 +305,14 @@
   padding-top: -20px;
 }
 
+.large-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  width: 100vw;
+}
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -316,6 +328,8 @@
   display: flex;
   flex-direction: column;
 }
+
+
 
 .hide {
   display: none;

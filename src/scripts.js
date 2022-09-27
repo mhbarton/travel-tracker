@@ -43,7 +43,8 @@ let pendingBookings = document.getElementById('pendingBookingsInfo');
 let totalAmount = document.getElementById('totalAmount');
 let destinationOptions = document.getElementById('destinations');
 let loginButton = document.getElementById('loginSubmitButton');
-let logoutButton = document.getElementById('logout');
+let logoutButton = document.querySelector('.logout');
+let logout = document.getElementById('logout');
 let estimatedCostButton = document.getElementById('estimatedCostButton');
 let bookItButton = document.getElementById('bookItButton');
 let keepSearchingButton = document.getElementById('keepSearchingButton');
@@ -60,30 +61,40 @@ let loginContainer = document.querySelector('.login-container');
 let usernameInput = document.getElementById('username');
 let passwordInput = document.getElementById('password');
 let loginErrorMessage = document.querySelector('.login-error-message');
+let loginForm = document.getElementById('login-view')
 
 //EVENT LISTENERS:
-// window.addEventListener('load', startData);
-loginButton.addEventListener('click', getDashboard);
+loginButton.addEventListener('click', openDashboard);
 estimatedCostButton.addEventListener('click', showEstimate);
 bookItButton.addEventListener('click', bookNewTrip);
 keepSearchingButton.addEventListener('click', refreshForm);
-
+logout.addEventListener('click', closeDashboard);
 
 //FUNCTIONS:
+function openDashboard(event) {
+  event.preventDefault()
+  if(usernameInput.value.length === 10 && usernameInput.value.includes('traveler') && parseInt(usernameInput.value.substring(8, 10)) <= 50 && passwordInput.value === 'travel') {
+    currentTraveler = parseInt(usernameInput.value.substring(8,10))
+    rightContainer.classList.remove('hide');
+    leftContainer.classList.remove('hide');
+    logoutButton.classList.remove('hide');
+    loginContainer.classList.add('hide');
+  } else {
+    loginErrorMessage.classList.remove('hide');
+  }
+  startData()
+};
+
 function generatePageLoad() {
-  // renderRandomTraveler();
-  // renderWelcomeTraveler()
+  let travelerID = parseInt(usernameInput.value.substring(8,10))
+  currentTraveler = new Traveler(allTravelerData[travelerID - 1]);
+  renderWelcomeTraveler()
   renderPastBookings();
   renderUpcomingBookings();
   renderPendingBookings();
   renderTotalAmount();
   populateDestinationOptions()
 }
-
-function renderRandomTraveler() {
-  let currentTravelerObj = allTravelerData[Math.floor(Math.random() * allTravelerData.length)];
-  return currentTraveler = new Traveler(currentTravelerObj);
-};
 
 function renderWelcomeTraveler() {
   welcomeTraveler.innerText = `Welcome, ${currentTraveler.returnTravelerFirstName()}!`
@@ -195,34 +206,11 @@ function refreshForm() {
   hide(estimatedCostContainer);
 };
 
-// function checkLogin(event) {
-//   event.preventDefault();
-//   if (usernameInput.value === "" || passwordInput.value === "") {
-//     loginErrorMessage.innerText = `Please enter both username and password.`;
-//   } else if (passwordInput.value !== "travel") {
-//     loginErrorMessage.innerText = `Incorrect Password`;
-//   } else if (!usernameInput.value.includes("traveler")) {
-//     loginErrorMessage.innerText = `That username does not exist; try again.`;
-//   } else {
-//     loginErrorMessage.innerText = '';
-//     leftContainer.classList.remove('hide')
-//     rightContainer.classList.remove('hide')
-//     loginContainer.classList.add('hide')
-//     startData();
-//     }
-//   }
-function getDashboard() {
-  event.preventDefault()
-  if(usernameInput.value.length === 10 && usernameInput.value.includes('traveler') && parseInt(usernameInput.value.substring(8, 10)) <= 50 && passwordInput.value === 'travel') {
-    currentTraveler = parseInt(usernameInput.value.substring(8,10))
-    rightContainer.classList.remove('hide');
-    leftContainer.classList.remove('hide');
-    loginContainer.classList.add('hide');
-  } else {
-    loginMessageError.classList.remove('hide');
-  }
-  startData()
-}
+function closeDashboard() {
+  hide(leftContainer);
+  hide(rightContainer);
+  unhide(loginContainer);
+};
 
 //HELPER FUNCTIONS
 function clearForm() {
