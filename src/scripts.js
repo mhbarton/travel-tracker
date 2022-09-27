@@ -1,9 +1,5 @@
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import { fetchData, fetchPost } from './apiCalls.js';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
 import './images/worldwide-logo.png';
 import './images/world-background.jpg';
 import Traveler from './Traveler.js';
@@ -92,7 +88,7 @@ function renderPastBookings(){
   const travelerPastTrips = currentTraveler.returnPastTrips(allTripData).filter(trip => {
     allDestinationData.forEach(destination => {
       if(destination.id === trip.destinationID) {
-        pastBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
+        pastBookings.innerHTML += `<img class="destination-image" src="${destination.image}" alt="${destination.alt}">
         <h4 class="destination-name"> ${destination.destination}</h4>`
       }
     })
@@ -104,7 +100,7 @@ function renderUpcomingBookings(){
   const travelerUpcomingTrips = currentTraveler.returnUpcomingTrips(allTripData).filter(trip => {
     allDestinationData.forEach(destination => {
       if(destination.id === trip.destinationID && trip.status === 'approved') {
-        upcomingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
+        upcomingBookings.innerHTML += `<img class="destination-image" src="${destination.image}" alt="${destination.alt}">
         <h4 class="destination-name"> ${destination.destination}</h4>`
       }
     })
@@ -116,7 +112,7 @@ function renderPendingBookings(){
   const travelerPendingTrips = currentTraveler.returnPendingTrips(allTripData).filter(trip => {
     allDestinationData.forEach(destination => {
       if(destination.id === trip.destinationID) {
-        pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
+        pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}" alt="${destination.alt}">
         <h4 class="destination-name"> ${destination.destination}</h4>`
       }
     })
@@ -171,6 +167,7 @@ function bookNewTrip() {
   let newTripData = {id:tripID, userID: travelerID, destinationID: destinationID, travelers: parseInt(numTravelersInput.value), date: formattedDate, duration: parseInt(durationInput.value), status: "pending", suggestedActivities: []}
   fetchPost('trips', newTripData)
     .then(data => updateData());
+  bookItButton.classList.add('wiggle');
   clearForm();
   hide(estimatedCostContainer);
 };
@@ -180,7 +177,7 @@ function renderNewPendingBookings() {
   const newPendingTrips = currentTraveler.returnPendingTrips(allTripData).filter(trip => {
     allDestinationData.forEach(destination => {
       if(destination.id === trip.destinationID && (!currentTraveler.returnPendingTrips(allTripData).includes(trip.id))) {
-        pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}">
+        pendingBookings.innerHTML += `<img class="destination-image" src="${destination.image}" alt="${destination.alt}">
         <h4 class="destination-name"> ${destination.destination}</h4>`
       }
     })
@@ -189,6 +186,7 @@ function renderNewPendingBookings() {
 };
 
 function refreshForm() {
+  keepSearchingButton.classList.add('wiggle');
   clearForm();
   hide(estimatedCostContainer);
 };
