@@ -71,5 +71,5 @@ mhood24@gmail.com |
 ## Credit
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) |
 ![Unsplash](https://img.shields.io/badge/Unsplash-000000?style=for-the-badge&logo=Unsplash&logoColor=white) |
-![Flaticon](<a href='https://github.com/shivamkapasia0' target="_blank"><img alt='' src='https://img.shields.io/badge/FlatIcon-100000?style=for-the-badge&logo=&logoColor=3EDD44&labelColor=black&color=black'/></a>) |
+![Flaticon](https://img.shields.io/badge/FlatIcon-100000?style=for-the-badge&logo=&logoColor=3EDD44&labelColor=black&color=black) |
 ![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)
